@@ -1,19 +1,12 @@
-
 [CmdletBinding()]
 param (
-    <# 
-        This parameter ensures the script will run lightly & silently.
-
-        The paramter (when enabled), will run without any output and appear as a blank terminal until
-        terminated with Ctrl + C. By default, this script will always send the Shift + F15 key combo.
-    #>
     [Parameter()]
     [Switch]$Silent,
 
     [Parameter()]
     [String]$Keys,
 
-    [Parameter()]
+    [Parameter()]s
     [Int]$Cycle
 )
 
