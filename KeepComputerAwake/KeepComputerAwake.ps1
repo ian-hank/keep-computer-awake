@@ -6,55 +6,42 @@ param (
     [Parameter()]
     [String]$Keys,
 
-    [Parameter()]s
-    [Int]$Cycle
+    [Parameter()]
+    [Int]$Cycle = 59
 )
 
-#Initiating the WshShell to use the SendKeys function
+# Initialize the WshShell object to use the SendKeys function
 $wShell = New-Object -ComObject WScript.Shell
 
-#Determining if the Keys parameter was provided and setting SendKeys arg
-if($PSBoundParameters.ContainsKey('Keys')) {
-    New-Variable -Name FINAL_KEY -Option Constant -Value ($Keys)
-
-    Function PrintKeyCombo {
-        Write-Host ("`n`GIVEN KEY: {0}" -f $FIRST_KEY)
-        Write-Host ("CYCLE TIME: {0} seconds`n" -f $CYCLE_TIME)
-    }
+# Determine the key-press combination based on the provided or default keys
+if ($Keys) {
+    $FINAL_KEY = $Keys
+    Write-Host "`nGiven key: $FINAL_KEY"
 } else {
-    #Default key-press comination to be used in the SendKeys command
-    $FIRST_KEY = '+' #Shift
-    $SECOND_KEY = '{F15}' #F15
-    New-Variable -Name FINAL_KEY -Option Constant -Value ($FIRST_KEY + $SECOND_KEY)
-
-    Function PrintKeyCombo {
-        Write-Host ("`nFIRST KEY :   {0}    (Shift)" -f $FIRST_KEY)
-        Write-Host ("SECOND KEY: {0}    (F15)`n" -f $SECOND_KEY)
-    }
+    $FIRST_KEY = '+'     # Shift
+    $SECOND_KEY = '{F15}' # F15
+    $FINAL_KEY = $FIRST_KEY + $SECOND_KEY
+    Write-Host "`nDefault key-press combination: $FIRST_KEY (Shift) + $SECOND_KEY (F15)"
 }
 
-#Determining if the Cycle parameter was provided
-if($PSBoundParameters.ContainsKey('Cycle')) {
-    New-Variable -Name CYCLE_TIME -Option Constant -Value ($Cycle)
-} else {
-    New-Variable -Name CYCLE_TIME -Option Constant -Value (59)
-}
+# Determine the cycle time based on the provided or default value
+$CYCLE_TIME = $Cycle
+Write-Host "Cycle time: $CYCLE_TIME seconds`n"
 
-#Determining if the Silent parameter was switched on
-if ($Silent.IsPresent) {
+# Check if the Silent parameter was specified
+if ($Silent) {
     while ($true) {
         $wShell.SendKeys($FINAL_KEY)
         Start-Sleep -Seconds $CYCLE_TIME
     }
 } else {
-    Write-Host "`nYour computer is now staying wide awake! Use Ctrl + C to exit (or close the window)."
-    PrintKeyCombo
-
-    #Sending key-press combination every 59 seconds to keep the computer awake
+    Write-Host "`nYour computer will stay awake! Use Ctrl + C to exit (or close the window)."
+    Write-Host "Key combination used: $FINAL_KEY"
     $sendKeysCount = 1
+
     while ($true) {
         $wShell.SendKeys($FINAL_KEY)
-        Write-Host ("---> Sent Key Combo: {0} [timesSent:{1}]" -f $FINAL_KEY, $sendKeysCount)
+        Write-Host "---> Sent key combination: $FINAL_KEY [timesSent: $sendKeysCount]"
         $sendKeysCount++
         Start-Sleep -Seconds $CYCLE_TIME
     }
