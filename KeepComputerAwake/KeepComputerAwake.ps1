@@ -23,6 +23,7 @@ if ($Keys) {
 } else {
     $FIRST_KEY = '+'        # Shift
     $SECOND_KEY = '{F15}'   # F15
+
     $FINAL_KEY = $FIRST_KEY + $SECOND_KEY
 }
 
