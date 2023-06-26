@@ -18,8 +18,32 @@ The script accepts the following parameters:
 
 To use the script, follow these steps:
 
-1. Clone the repository (or download the zip) and extract it to a local directory.
-2. Navigate to the directory where the script is located.
-3. Run the script using the command:
-   ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File KeepComputerAwake.ps
+1. **Download the Script**
+   - Click on the green "Code" button on the repository page.
+   - Select "Download ZIP" to download the script as a ZIP file.
+   - Save the ZIP file to a location on your computer.
+   - Extract the contents of the ZIP file to a local directory. You should now have a folder containing the script.
+
+2. **Open a PowerShell Window**
+   - Press the `Windows` key on your keyboard.
+   - Type "PowerShell" and select "Windows PowerShell" from the search results.
+   - A PowerShell window will open.
+
+3. **Navigate to the Script Directory**
+   - In the PowerShell window, type `cd <path-to-script>` and press `Enter`.
+   - Replace `<path-to-script>` with the actual path to the directory where you extracted the script.
+   - Alternatively, you can navigate to the script directory using the `cd` command followed by the directory path.
+
+4. **Execute the Script**
+   - In the PowerShell window, type the following command and press `Enter`:
+     ```powershell
+     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+     ```
+   - This command sets the execution policy to allow running scripts for the current PowerShell session.
+   - Next, type the following command and press `Enter`:
+     ```powershell
+     .\KeepComputerAwake.ps1
+     ```
+   - The script will start running and keeping your computer awake.
+
+That's it! You have successfully executed the script to keep your computer awake. If you encounter any issues or have further questions, feel free to ask.

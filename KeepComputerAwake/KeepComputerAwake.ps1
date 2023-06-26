@@ -20,6 +20,7 @@ if ($Keys) {
     } catch {
         Write-Host "Invalid keypress combination input. Using the default key-press combination."
         $FINAL_KEY = '+{F15}' # Default: Shift + F15
+    }
 } else {
     $FIRST_KEY = '+'        # Shift
     $SECOND_KEY = '{F15}'   # F15
