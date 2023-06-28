@@ -47,7 +47,7 @@ To use the script, follow these steps:
    - This command sets the execution policy to allow running scripts for the current PowerShell session.
    - Next, type the following command and press `Enter`:
      ```powershell
-     .\KeepComputerAwake.ps1
+     .\KeepComputerAwake.ps1 [optional-parameters-here]
      ```
    - The script will start running and keeping your computer awake.
 
